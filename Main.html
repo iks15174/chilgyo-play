@@ -2,10 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>칠교놀이</title>
 </head>
-<body onload="draw();">
+<body onload="start();">
     <canvas id="canvas" width="350" height="350"></canvas>
-    <script type="text/javascript" src="./js/Triangle.js"></script>
+    <script type="text/javascript" src="./js/shape/Triangle.js"></script>
+    <script type="text/javascript" src="./js/config/Initialize.js"></script>
+    <script type="text/javascript" src="./js/eventHandler/DragEventHandler.js"></script>
 </body>
+<script>
+    function start() {
+        const canvas = document.getElementById('canvas');
+        initialize(canvas)
+        animate(canvas)
+    }
+</script>
 </html>
