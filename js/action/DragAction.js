@@ -15,8 +15,6 @@ class DragAction {
     mouseDownHandler(e) {
         const [x, y] = this.findCurrentPostion(e)
 
-        console.log("MouseDown : (" + x + ", " + y + ")");
-
         this.prevMouseX = x;
         this.prevMouseY = y;
 
@@ -26,7 +24,7 @@ class DragAction {
     mouseMoveHandler(e) {
         if(this.isMouseDown && this.shape.include(this.prevMouseX, this.prevMouseY)) {
             const [x, y] = this.findCurrentPostion(e)
-            this.shape.moveTo(x, y)
+            this.shape.moveTo(x - this.prevMouseX, y - this.prevMouseY)
             this.prevMouseX = x;
             this.prevMouseY = y;
         }  
