@@ -2,44 +2,13 @@ var triangle1 = null
 var dragHandler = null
 
 function initialize(canvas) {
-    const triangle1 = makeTriange1()
+    makeTriange1(canvas)
 
-    registerDrag(canvas, [triangle1])
 }
 
-function registerDrag(canvas, shapes) {
-    const dragHandler = makeDragHandler(canvas)
-    shapes.forEach((shape) => {
-        dragHandler.addShape(shape)
-    })
-
-    canvas.onmousedown = function(e) {
-        dragHandler.mouseDownHandler(e)
-    }
-
-    canvas.onmousemove = function(e) {
-        dragHandler.mouseMoveHandler(e)
-    }
-
-    canvas.onmouseup = function(e) {
-        dragHandler.mouseUpHandler()
-    }
-
-    canvas.onmouseout = function(e) {
-        dragHandler.mouseUpHandler()
-    }
-}
-
-function makeDragHandler(canvas) {
-    if(dragHandler === null) {
-        dragHandler = new DragEventHandler(canvas)
-    }
-    return dragHandler
-}
-
-function makeTriange1() {
+function makeTriange1(canvas) {
     if(triangle1 === null) {
-        triangle1 = new Triangle(100, 100, 100, 100)
+        triangle1 = new Triangle(canvas, 100, 100, 100, 100)
     }
     return triangle1
 }

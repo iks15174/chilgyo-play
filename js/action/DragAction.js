@@ -1,16 +1,15 @@
-class DragEventHandler {
+class DragAction {
 
-    constructor(canvas) {
-        this.allShape = []
-        this.selectedShape = []
+    constructor(canvas, shape) {
+        canvas.onmousedown = (e) => this.mouseDownHandler(e)
+        canvas.onmousemove = (e) => this.mouseMoveHandler(e)
+        canvas.onmouseup = () => this.mouseUpHandler()
+
+        this.shape = shape
+        this.canvas = canvas
         this.isMouseDown = false
         this.prevMouseX = -1
         this.prevMouseY = -1
-        this.canvas = canvas
-    }
-
-    addShape(shape) {
-        this.allShape.push(shape)
     }
 
     mouseDownHandler(e) {
@@ -22,31 +21,19 @@ class DragEventHandler {
         this.prevMouseY = y;
 
         this.isMouseDown = true;
-
-        this.allShape.forEach(shape => {
-            if(shape.include(x, y)) {
-                this.selectedShape.push(shape)
-                console.log(shape)
-            }
-        })
     }
 
     mouseMoveHandler(e) {
-        if(this.isMouseDown && this.selectedShape.length !== 0) {
+        if(this.isMouseDown && this.shape.include(this.prevMouseX, this.prevMouseY)) {
             const [x, y] = this.findCurrentPostion(e)
-
-            this.selectedShape.forEach(shape => {
-                shape.moveTo(x, y)
-            })
-
+            this.shape.moveTo(x, y)
             this.prevMouseX = x;
             this.prevMouseY = y;
         }  
     }
 
     mouseUpHandler() {
-        this.selectedShape = []
-        this.isMouseDown = true
+        this.isMouseDown = false
     }
 
     findCurrentPostion(e) {

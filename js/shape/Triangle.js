@@ -1,16 +1,17 @@
 class Triangle {
     
-    constructor(height, width, x, y) {
+    constructor(canvas, height, width, x, y) {
+        this.canvas = canvas
         this.height = height
         this.width = width
         this.x = x
         this.y = y
+        new DragAction(canvas, this)
     }
 
     getBoard() {
-        const canvas = document.getElementById('canvas');
-        if(canvas.getContext) {
-            return canvas.getContext('2d');
+        if(this.canvas.getContext) {
+            return this.canvas.getContext('2d');
         }
         return null
     }
