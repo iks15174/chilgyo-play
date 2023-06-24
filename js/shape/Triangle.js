@@ -8,7 +8,8 @@ class Triangle {
       [x, y + height],
       [x + width, y + height],
     ];
-    this.angle = angle;
+
+    this.rotationAction = new RotationAction(canvas, this);
     new DragAction(canvas, this);
   }
 
@@ -22,12 +23,24 @@ class Triangle {
   draw() {
     const board = this.getBoard();
     if (board !== null) {
+      board.fillStyle = "black";
       board.beginPath();
       board.moveTo(this.coordinate[0][0], this.coordinate[0][1]);
       board.lineTo(this.coordinate[1][0], this.coordinate[1][1]);
       board.lineTo(this.coordinate[2][0], this.coordinate[2][1]);
       board.fill();
+      this.rotationAction.drawButton(board);
     }
+  }
+
+  getCenter() {
+    const xCenter =
+      (this.coordinate[0][0] + this.coordinate[1][0] + this.coordinate[2][0]) /
+      3;
+    const yCenter =
+      (this.coordinate[0][1] + this.coordinate[1][1] + this.coordinate[2][1]) /
+      3;
+    return [xCenter, yCenter];
   }
 
   include(x, y) {
@@ -51,6 +64,9 @@ class Triangle {
   }
 
   moveTo(x, y) {
-    this.coordinate = this.coordinate.map(([curX, curY]) => [curX + x, curY + y]);
+    this.coordinate = this.coordinate.map(([curX, curY]) => [
+      curX + x,
+      curY + y,
+    ]);
   }
 }
