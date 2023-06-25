@@ -1,16 +1,10 @@
-var triangle1 = null
 var dragHandler = null
+var allShapes = []
 
 function initialize(canvas) {
-    makeTriange1(canvas)
-
-}
-
-function makeTriange1(canvas) {
-    if(triangle1 === null) {
-        triangle1 = new Triangle(canvas, 100, 100, 100, 100, 90)
-    }
-    return triangle1
+    var triangle1 = new Triangle(canvas, 100, 100, 100, 100, 'black')
+    var triangle2 = new Triangle(canvas, 50, 50, 100, 100, 'red')
+    allShapes = allShapes.concat([triangle1, triangle2])
 }
 
 function drawCanvasBackground(canvas) {
@@ -24,7 +18,8 @@ function drawCanvasBackground(canvas) {
 
 function animate(canvas) {
     drawCanvasBackground(canvas);
-    triangle1.draw();
+    allShapes.sort((a, b) => a.lastModified - b.lastModified)
+    allShapes.forEach(a => a.draw())
 
     requestAnimationFrame(function() {
         animate(canvas);

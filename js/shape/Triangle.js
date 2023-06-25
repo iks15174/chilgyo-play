@@ -1,5 +1,5 @@
 class Triangle {
-  constructor(canvas, height, width, x, y, angle) {
+  constructor(canvas, height, width, x, y, color) {
     this.canvas = canvas;
     this.height = height;
     this.width = width;
@@ -8,8 +8,9 @@ class Triangle {
       [x, y + height],
       [x + width, y + height],
     ];
-
+    this.color = color
     this.rotationAction = new RotationAction(canvas, this);
+    this.lastModified = new Date()
     new DragAction(canvas, this);
   }
 
@@ -23,7 +24,7 @@ class Triangle {
   draw() {
     const board = this.getBoard();
     if (board !== null) {
-      board.fillStyle = "black";
+      board.fillStyle = this.color;
       board.beginPath();
       board.moveTo(this.coordinate[0][0], this.coordinate[0][1]);
       board.lineTo(this.coordinate[1][0], this.coordinate[1][1]);
@@ -52,6 +53,7 @@ class Triangle {
       curX + x,
       curY + y,
     ]);
+    this.lastModified = new Date()
   }
 
   isPointInsidePolygon(point) {
