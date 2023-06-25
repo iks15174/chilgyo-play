@@ -8,9 +8,9 @@ class Triangle {
       [x, y + height],
       [x + width, y + height],
     ];
-    this.color = color
+    this.color = color;
     this.rotationAction = new RotationAction(canvas, this);
-    this.lastModified = new Date()
+    this.lastModified = new Date();
     new DragAction(canvas, this);
   }
 
@@ -45,7 +45,7 @@ class Triangle {
   }
 
   include(x, y) {
-    return this.isPointInsidePolygon([x, y])
+    return this.isPointInsidePolygon([x, y]);
   }
 
   moveTo(x, y) {
@@ -53,26 +53,30 @@ class Triangle {
       curX + x,
       curY + y,
     ]);
-    this.lastModified = new Date()
+    this.lastModified = new Date();
   }
 
   isPointInsidePolygon(point) {
     const [x, y] = point;
     let isInside = false;
-  
-    for (let i = 0, j = this.coordinate.length - 1; i < this.coordinate.length; j = i++) {
+
+    for (
+      let i = 0, j = this.coordinate.length - 1;
+      i < this.coordinate.length;
+      j = i++
+    ) {
       const [viX, viY] = this.coordinate[i];
       const [vjX, vjY] = this.coordinate[j];
-  
+
       const isCrossing =
-        (viY > y) !== (vjY > y) &&
+        viY > y !== vjY > y &&
         x < ((vjX - viX) * (y - viY)) / (vjY - viY) + viX;
-  
+
       if (isCrossing) {
         isInside = !isInside;
       }
     }
-  
+
     return isInside;
   }
 }
