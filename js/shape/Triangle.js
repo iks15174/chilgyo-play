@@ -44,23 +44,7 @@ class Triangle {
   }
 
   include(x, y) {
-    const a = this.coordinate[0];
-    const b = this.coordinate[1];
-    const c = this.coordinate[2];
-    const p = [x, y];
-
-    const nn = this.calcTriangle(a, b, c);
-    const aa = this.calcTriangle(p, b, c);
-    const bb = this.calcTriangle(a, p, c);
-    const cc = this.calcTriangle(a, b, p);
-
-    return nn === aa + bb + cc;
-  }
-
-  calcTriangle(a, b, c) {
-    return Math.abs(
-      a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1])
-    );
+    return this.isPointInsidePolygon([x, y])
   }
 
   moveTo(x, y) {
@@ -68,5 +52,25 @@ class Triangle {
       curX + x,
       curY + y,
     ]);
+  }
+
+  isPointInsidePolygon(point) {
+    const [x, y] = point;
+    let isInside = false;
+  
+    for (let i = 0, j = this.coordinate.length - 1; i < this.coordinate.length; j = i++) {
+      const [viX, viY] = this.coordinate[i];
+      const [vjX, vjY] = this.coordinate[j];
+  
+      const isCrossing =
+        (viY > y) !== (vjY > y) &&
+        x < ((vjX - viX) * (y - viY)) / (vjY - viY) + viX;
+  
+      if (isCrossing) {
+        isInside = !isInside;
+      }
+    }
+  
+    return isInside;
   }
 }

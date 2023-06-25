@@ -28,7 +28,6 @@ class RotationAction {
     this.shape.coordinate = this.shape.coordinate.map(([x, y]) => {
       return this.rotateCoordinate(x, y);
     });
-    console.log(this.shape.coordinate);
   }
 
   drawButton(context) {
