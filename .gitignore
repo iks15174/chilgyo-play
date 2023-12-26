@@ -17,6 +17,7 @@ pnpm-debug.log
 
 # Visual Studio Code
 .vscode/
+.idea/*
 
 # macOS
 .DS_Store
