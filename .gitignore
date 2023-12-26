@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+
+# User-specific files
+npm-debug.log
+yarn-error.log
+.yarn/*
+.pnp.*
+
+# Dependency directories
+pnpm-debug.log
+.pnp
+.pnp.js
+
+# Optional npm cache directory
+.npm
+
+# Visual Studio Code
+.vscode/
+.idea/*
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini

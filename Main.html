@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>칠교놀이</title>
+</head>
+<body onload="start();">
+    <canvas id="canvas" width="700" height="700"></canvas>
+    <script type="text/javascript" src="./js/action/DragAction.js"></script>
+    <script type="text/javascript" src="./js/action/RotationAction.js"></script>
+    <script type="text/javascript" src="./js/shape/Triangle.js"></script>
+    <script type="text/javascript" src="./js/config/IniFtialize.js"></script>
+</body>
+<script>
+    function start() {
+        const canvas = document.getElementById('canvas');
+        initialize(canvas)
+        animate(canvas)
+    }
+</script>
+</html>
